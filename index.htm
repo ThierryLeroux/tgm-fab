@@ -54,58 +54,48 @@
         }
     </style>
     <script>
-        function decryptText(encryptedText) {
-            let decryptedText = "";
-            for (let i = 0; i < encryptedText.length; i++) {
-                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
+        function Abc123(a, b) {
+            let c = "";
+            let d = 0;
+            for (let e = 0; e < a.length; e++) {
+                c += String.fromCharCode(a.charCodeAt(e) ^ b.charCodeAt(d));
+                d = (d + 1) % b.length;
             }
-            return decryptedText;
+            return c;
         }
 
-        function decodePercentEncodedString(encodedString) {
-            return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        function Def456(a) {
+            return a.replace(/%([0-9A-F]{2})/g, function(match, p1) {
                 return String.fromCharCode(parseInt(p1, 16));
             });
         }
 
-        function displayInfo() {
+        function Ghi789() {
             try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const encryptedText = urlParams.get('data');
-                console.log("Step 1 - Encrypted Text from QR Code:", encryptedText); // Step 1
+                const a = new URLSearchParams(window.location.search);
+                const b = a.get('data');
+                const c = "a1b2c3d4e5f6g7h8";
+                const d = Abc123(b, c);
+                const e = d.split(';');
+                const f = e.map(part => Def456(part));
 
-                const decryptedText = decryptText(encryptedText);
-                console.log("Step 2 - Decrypted Text (still URL encoded):", decryptedText); // Step 2
-
-                const parts = decryptedText.split(';');
-                console.log("Step 3 - URL Encoded Variables:"); // Step 3
-                parts.forEach((part, index) => {
-                    console.log(`Part ${index + 1}:`, part);
-                });
-
-                const decodedParts = parts.map(part => decodePercentEncodedString(part));
-                console.log("Step 4 - Decoded Variables:"); // Step 4
-                decodedParts.forEach((part, index) => {
-                    console.log(`Decoded Part ${index + 1}:`, part);
-                });
-
-                document.getElementById('version').innerText = decodedParts[0];
-                document.getElementById('exercice').innerText = decodedParts[1];
-                document.getElementById('code').innerText = decodedParts[2];
-                document.getElementById('prenom').innerText = decodedParts[3];
-                document.getElementById('debut').innerText = decodedParts[4];
-                document.getElementById('nom').innerText = decodedParts[5];
-                document.getElementById('reussite').innerText = decodedParts[6];
-                document.getElementById('matricule').innerText = decodedParts[7];
-                document.getElementById('questions').innerText = decodedParts[8];
+                document.getElementById('version').innerText = f[0];
+                document.getElementById('exercice').innerText = f[1];
+                document.getElementById('code').innerText = f[2];
+                document.getElementById('prenom').innerText = f[3];
+                document.getElementById('debut').innerText = f[4];
+                document.getElementById('nom').innerText = f[5];
+                document.getElementById('reussite').innerText = f[6];
+                document.getElementById('matricule').innerText = f[7];
+                document.getElementById('questions').innerText = f[8];
             } catch (error) {
                 console.error("Error decoding the information:", error);
-                document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.</div>";
+                document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
             }
         }
     </script>
 </head>
-<body onload="displayInfo()">
+<body onload="Ghi789()">
     <div class="header">
         <img src="logo-cvm.svg" alt="Logo">
         <div class="right-align">
