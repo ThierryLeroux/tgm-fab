@@ -21,37 +21,16 @@
         }
     </style>
     <script>
-        function decryptText(encryptedText) {
-            let decryptedText = "";
-            for (let i = 0; i < encryptedText.length; i++) {
-                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
-            }
-            return decryptedText;
-        }
-
-        function base64Decode(str) {
-            return decodeURIComponent(atob(str).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-        }
-
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
-            const base64EncodedText = urlParams.get('data');
-            const encryptedText = base64Decode(base64EncodedText);
-            const decryptedText = decryptText(encryptedText);
-            const parts = decryptedText.split(';');
-            let tableContent = `
-                <tr><td>Version</td><td>${parts[0]}</td></tr>
-                <tr><td>Exercice</td><td>${parts[1]}</td></tr>
-                <tr><td>Code de réussite Moodle</td><td>${parts[2]}</td></tr>
-                <tr><td>Prénom</td><td>${parts[3]}</td></tr>
-                <tr><td>Début de l'exercice</td><td>${parts[4]}</td></tr>
-                <tr><td>Nom</td><td>${parts[5]}</td></tr>
-                <tr><td>Réussite de l'exercice</td><td>${parts[6]}</td></tr>
-                <tr><td>Matricule</td><td>${parts[7]}</td></tr>
-                <tr><td>Questions réussies</td><td>${parts[8]}</td></tr>
-            `;
+            const data = urlParams.get('data');
+            const parts = data.split(';');
+            let tableContent = '';
+
+            parts.forEach(part => {
+                const [key, value] = part.split('=');
+                tableContent += `<tr><td>${key}</td><td>${decodeURIComponent(value)}</td></tr>`;
+            });
 
             document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
         }
