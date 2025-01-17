@@ -24,7 +24,7 @@
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
             const data = urlParams.get('data');
-            const parts = data.split(';');
+            const parts = data.split('|');
             let tableContent = `
                 <tr><td>Version</td><td>${decodeURIComponent(parts[0].split('=')[1])}</td></tr>
                 <tr><td>Exercice</td><td>${decodeURIComponent(parts[1].split('=')[1])}</td></tr>
