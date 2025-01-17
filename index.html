@@ -29,11 +29,17 @@
             return decryptedText;
         }
 
+        function base64Decode(str) {
+            return decodeURIComponent(atob(str).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }
+
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
-            const encryptedText = urlParams.get('data');
-            const decodedText = decodeURIComponent(encryptedText);
-            const decryptedText = decryptText(decodedText);
+            const base64EncodedText = urlParams.get('data');
+            const encryptedText = base64Decode(base64EncodedText);
+            const decryptedText = decryptText(encryptedText);
             const parts = decryptedText.split(';');
             let tableContent = `
                 <tr><td>Version</td><td>${parts[0]}</td></tr>
