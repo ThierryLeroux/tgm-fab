@@ -8,6 +8,17 @@
             padding: 20px;
             font-family: Arial, sans-serif;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            max-width: 150px;
+        }
+        .header .right-align {
+            text-align: right;
+        }
         table {
             width: auto;
             margin: 20px auto;
@@ -85,8 +96,16 @@
     </script>
 </head>
 <body onload="displayInfo()">
+    <div class="header">
+        <div class="right-align">
+            Techniques de génie mécanique<br>
+            Technique du génie de la maintenance industrielle<br>
+            (fiabilité des systèmes de production)
+        </div>
+        <img src="logo-cvm.svg" alt="Logo">
+    </div>
+    <h1 class="text-center">Rapport de réussite - calcul de paramètres d'usinage</h1>
     <div class="container">
-        <h1 class="text-center">Rapport de réussite - calcul de paramètres d'usinage</h1>
         <table>
             <tr class="bottom-border">
                 <td class="bold-right">Version :</td>
@@ -100,7 +119,7 @@
                 <td class="bold-right">Code de réussite Moodle :</td>
                 <td id="code"></td>
             </tr>
-            <tr class="bottom-border">
+            <tr>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -112,7 +131,7 @@
                 <td class="bold-right">Début de l'exercice :</td>
                 <td id="debut"></td>
             </tr>
-            <tr>
+            <tr class="bottom-border">
                 <td class="bold-right">Nom :</td>
                 <td id="nom"></td>
                 <td class="bold-right">Réussite de l'exercice :</td>
@@ -123,16 +142,6 @@
                 <td id="matricule"></td>
                 <td class="bold-right">Questions réussies :</td>
                 <td id="questions"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right-align">
-                    Techniques de génie mécanique<br>
-                    Technique du génie de la maintenance industrielle<br>
-                    (fiabilité des systèmes de production)
-                </td>
             </tr>
         </table>
     </div>
