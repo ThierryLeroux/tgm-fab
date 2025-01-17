@@ -36,15 +36,15 @@
                 const parts = decryptedText.split(';');
                 console.log("Parts:", parts); // Debugging log
                 let tableContent = `
-                    <tr><td>Version</td><td>${decodeURIComponent(parts[0])}</td></tr>
-                    <tr><td>Exercice</td><td>${decodeURIComponent(parts[1])}</td></tr>
-                    <tr><td>Code de réussite Moodle</td><td>${decodeURIComponent(parts[2])}</td></tr>
-                    <tr><td>Prénom</td><td>${decodeURIComponent(parts[3])}</td></tr>
-                    <tr><td>Début de l'exercice</td><td>${decodeURIComponent(parts[4])}</td></tr>
-                    <tr><td>Nom</td><td>${decodeURIComponent(parts[5])}</td></tr>
-                    <tr><td>Réussite de l'exercice</td><td>${decodeURIComponent(parts[6])}</td></tr>
-                    <tr><td>Matricule</td><td>${decodeURIComponent(parts[7])}</td></tr>
-                    <tr><td>Questions réussies</td><td>${decodeURIComponent(parts[8])}</td></tr>
+                    <tr><td>Version</td><td>${parts[0]}</td></tr>
+                    <tr><td>Exercice</td><td>${parts[1]}</td></tr>
+                    <tr><td>Code de réussite Moodle</td><td>${parts[2]}</td></tr>
+                    <tr><td>Prénom</td><td>${parts[3]}</td></tr>
+                    <tr><td>Début de l'exercice</td><td>${parts[4]}</td></tr>
+                    <tr><td>Nom</td><td>${parts[5]}</td></tr>
+                    <tr><td>Réussite de l'exercice</td><td>${parts[6]}</td></tr>
+                    <tr><td>Matricule</td><td>${parts[7]}</td></tr>
+                    <tr><td>Questions réussies</td><td>${parts[8]}</td></tr>
                 `;
 
                 document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
