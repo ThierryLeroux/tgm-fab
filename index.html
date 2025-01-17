@@ -23,7 +23,7 @@
             for (let i = 0; i < encryptedText.length; i++) {
                 decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
             }
-            return decryptedText;
+            return decodeURIComponent(decryptedText);
         }
 
         function displayInfo() {
