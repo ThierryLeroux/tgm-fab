@@ -26,6 +26,12 @@
             return decryptedText;
         }
 
+        function decodePercentEncodedString(encodedString) {
+            return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+                return String.fromCharCode(parseInt(p1, 16));
+            });
+        }
+
         function displayInfo() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -41,14 +47,7 @@
                     console.log(`Part ${index + 1}:`, part);
                 });
 
-                const decodedParts = parts.map(part => {
-                    try {
-                        return decodeURIComponent(part);
-                    } catch (e) {
-                        console.error(`Error decoding part ${part}:`, e);
-                        return part;
-                    }
-                });
+                const decodedParts = parts.map(part => decodePercentEncodedString(part));
                 console.log("Step 4 - Decoded Variables:"); // Step 4
                 decodedParts.forEach((part, index) => {
                     console.log(`Decoded Part ${index + 1}:`, part);
@@ -68,7 +67,7 @@
 
                 document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
             } catch (error) {
-                console.error("Error decoding URI component:", error);
+                console.error("Error decoding the information:", error);
                 document.getElementById('info').innerHTML = "<p>Error decoding the information. Please check the QR code and try again.</p>";
             }
         }
