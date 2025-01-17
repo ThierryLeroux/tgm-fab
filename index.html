@@ -33,7 +33,7 @@
                 console.log("Encrypted Text:", encryptedText); // Debugging log
                 const decryptedText = decryptText(decodeURIComponent(encryptedText));
                 console.log("Decrypted Text:", decryptedText); // Debugging log
-                const parts = decryptedText.split(';');
+                const parts = decryptedText.split(';').map(part => decodeURIComponent(part));
                 console.log("Parts:", parts); // Debugging log
                 let tableContent = `
                     <tr><td>Version</td><td>${parts[0]}</td></tr>
