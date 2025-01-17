@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Decrypted Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
     <script>
         function decryptText(encryptedText) {
             let decryptedText = "";
@@ -16,12 +30,73 @@
             const urlParams = new URLSearchParams(window.location.search);
             const encryptedText = decodeURIComponent(urlParams.get('data'));
             const decryptedText = decryptText(encryptedText);
-            document.getElementById('info').innerText = decryptedText;
+            const lines = decryptedText.split('\n');
+            let tableContent = '';
+
+            lines.forEach(line => {
+                const parts = line.split(':');
+                if (parts.length === 2) {
+                    tableContent += `<tr><td>${parts[0].trim()}</td><td>${parts[1].trim()}</td></tr>`;
+                }
+            });
+
+            document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
         }
     </script>
 </head>
 <body onload="displayInfo()">
-    <h1>Decrypted Information r1</h1>
-    <pre id="info"></pre>
+    <h1>Decrypted Information</h1>
+    <div id="info"></div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decrypted Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        function decryptText(encryptedText) {
+            let decryptedText = "";
+            for (let i = 0; i < encryptedText.length; i++) {
+                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
+            }
+            return decryptedText;
+        }
+
+        function displayInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedText = decodeURIComponent(urlParams.get('data'));
+            const decryptedText = decryptText(encryptedText);
+            const lines = decryptedText.split('\n');
+            let tableContent = '';
+
+            lines.forEach(line => {
+                const parts = line.split(':');
+                if (parts.length === 2) {
+                    tableContent += `<tr><td>${parts[0].trim()}</td><td>${parts[1].trim()}</td></tr>`;
+                }
+            });
+
+            document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
+        }
+    </script>
+</head>
+<body onload="displayInfo()">
+    <h1>Decrypted Information</h1>
+    <div id="info"></div>
 </body>
 </html>
