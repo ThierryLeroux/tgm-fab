@@ -31,8 +31,9 @@
 
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
-            const encryptedText = decodeURIComponent(urlParams.get('data'));
-            const decryptedText = decryptText(encryptedText);
+            const encryptedText = urlParams.get('data');
+            const decodedText = decodeURIComponent(encryptedText);
+            const decryptedText = decryptText(decodedText);
             const parts = decryptedText.split(';');
             let tableContent = `
                 <tr><td>Version</td><td>${parts[0]}</td></tr>
