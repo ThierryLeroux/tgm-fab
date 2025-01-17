@@ -30,7 +30,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const encryptedText = decodeURIComponent(urlParams.get('data'));
             const decryptedText = decryptText(encryptedText);
-            const lines = decryptedText.split('\n');
+            const lines = decryptedText.split(';');
             let tableContent = '';
 
             lines.forEach(line => {
