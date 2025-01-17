@@ -37,27 +37,22 @@
 
                 const parts = decryptedText.split(';');
                 console.log("Step 3 - URL Encoded Variables:"); // Step 3
-                console.log("Version:", parts[0]);
-                console.log("Exercice:", parts[1]);
-                console.log("Code de réussite Moodle:", parts[2]);
-                console.log("Prénom:", parts[3]);
-                console.log("Début de l'exercice:", parts[4]);
-                console.log("Nom:", parts[5]);
-                console.log("Réussite de l'exercice:", parts[6]);
-                console.log("Matricule:", parts[7]);
-                console.log("Questions réussies:", parts[8]);
+                parts.forEach((part, index) => {
+                    console.log(`Part ${index + 1}:`, part);
+                });
 
-                const decodedParts = parts.map(part => decodeURIComponent(part));
+                const decodedParts = parts.map(part => {
+                    try {
+                        return decodeURIComponent(part);
+                    } catch (e) {
+                        console.error(`Error decoding part ${part}:`, e);
+                        return part;
+                    }
+                });
                 console.log("Step 4 - Decoded Variables:"); // Step 4
-                console.log("Version:", decodedParts[0]);
-                console.log("Exercice:", decodedParts[1]);
-                console.log("Code de réussite Moodle:", decodedParts[2]);
-                console.log("Prénom:", decodedParts[3]);
-                console.log("Début de l'exercice:", decodedParts[4]);
-                console.log("Nom:", decodedParts[5]);
-                console.log("Réussite de l'exercice:", decodedParts[6]);
-                console.log("Matricule:", decodedParts[7]);
-                console.log("Questions réussies:", decodedParts[8]);
+                decodedParts.forEach((part, index) => {
+                    console.log(`Decoded Part ${index + 1}:`, part);
+                });
 
                 let tableContent = `
                     <tr><td>Version</td><td>${decodedParts[0]}</td></tr>
