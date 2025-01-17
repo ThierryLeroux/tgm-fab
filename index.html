@@ -31,7 +31,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const encryptedText = urlParams.get('data');
                 console.log("Encrypted Text:", encryptedText); // Debugging log
-                const decryptedText = decryptText(decodeURIComponent(encryptedText));
+                const decryptedText = decryptText(encryptedText);
                 console.log("Decrypted Text:", decryptedText); // Debugging log
                 const parts = decryptedText.split(';').map(part => decodeURIComponent(part));
                 console.log("Parts:", parts); // Debugging log
