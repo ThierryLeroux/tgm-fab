@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decrypted Information</title>
+    <script>
+        function decryptText(encryptedText) {
+            let decryptedText = "";
+            for (let i = 0; i < encryptedText.length; i++) {
+                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
+            }
+            return decryptedText;
+        }
+
+        function displayInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedText = urlParams.get('data');
+            const decryptedText = decryptText(encryptedText);
+            document.getElementById('info').innerText = decryptedText;
+        }
+    </script>
+</head>
+<body onload="displayInfo()">
+    <h1>Decrypted Information</h1>
+    <p id="info"></p>
+</body>
+</html>
