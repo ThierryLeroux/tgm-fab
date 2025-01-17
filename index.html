@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Decrypted Information</title>
+    <title>Decrypted Information r0</title>
     <script>
         function decryptText(encryptedText) {
             let decryptedText = "";
@@ -14,7 +14,7 @@
 
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
-            const encryptedText = urlParams.get('data');
+            const encryptedText = decodeURIComponent(urlParams.get('data'));
             const decryptedText = decryptText(encryptedText);
             document.getElementById('info').innerText = decryptedText;
         }
