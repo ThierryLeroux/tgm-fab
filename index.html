@@ -38,7 +38,7 @@
         function displayInfo() {
             const urlParams = new URLSearchParams(window.location.search);
             const base64EncodedText = urlParams.get('data');
-            const encryptedText = base64Decode(base64EncodedText);
+            const encryptedText = atob(base64EncodedText);
             const decryptedText = decryptText(encryptedText);
             const parts = decryptedText.split(';');
             let tableContent = `
