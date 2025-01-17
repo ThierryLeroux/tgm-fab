@@ -14,10 +14,14 @@
             align-items: center;
         }
         .header img {
-            max-width: 150px;
+            max-width: 300px; /* Twice the original size */
         }
         .header .right-align {
             text-align: right;
+        }
+        .title {
+            text-align: center;
+            margin-top: 20px;
         }
         table {
             width: auto;
@@ -97,14 +101,14 @@
 </head>
 <body onload="displayInfo()">
     <div class="header">
+        <img src="logo-cvm.svg" alt="Logo">
         <div class="right-align">
             Techniques de génie mécanique<br>
             Technique du génie de la maintenance industrielle<br>
             (fiabilité des systèmes de production)
         </div>
-        <img src="logo-cvm.svg" alt="Logo">
     </div>
-    <h1 class="text-center">Rapport de réussite - calcul de paramètres d'usinage</h1>
+    <h1 class="title">Rapport de réussite - calcul de paramètres d'usinage</h1>
     <div class="container">
         <table>
             <tr class="bottom-border">
