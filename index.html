@@ -27,23 +27,31 @@
         }
 
         function displayInfo() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const encryptedText = decodeURIComponent(urlParams.get('data'));
-            const decryptedText = decryptText(encryptedText);
-            const parts = decryptedText.split(';');
-            let tableContent = `
-                <tr><td>Version</td><td>${decodeURIComponent(parts[0])}</td></tr>
-                <tr><td>Exercice</td><td>${decodeURIComponent(parts[1])}</td></tr>
-                <tr><td>Code de réussite Moodle</td><td>${decodeURIComponent(parts[2])}</td></tr>
-                <tr><td>Prénom</td><td>${decodeURIComponent(parts[3])}</td></tr>
-                <tr><td>Début de l'exercice</td><td>${decodeURIComponent(parts[4])}</td></tr>
-                <tr><td>Nom</td><td>${decodeURIComponent(parts[5])}</td></tr>
-                <tr><td>Réussite de l'exercice</td><td>${decodeURIComponent(parts[6])}</td></tr>
-                <tr><td>Matricule</td><td>${decodeURIComponent(parts[7])}</td></tr>
-                <tr><td>Questions réussies</td><td>${decodeURIComponent(parts[8])}</td></tr>
-            `;
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const encryptedText = decodeURIComponent(urlParams.get('data'));
+                console.log("Encrypted Text:", encryptedText); // Debugging log
+                const decryptedText = decryptText(encryptedText);
+                console.log("Decrypted Text:", decryptedText); // Debugging log
+                const parts = decryptedText.split(';');
+                console.log("Parts:", parts); // Debugging log
+                let tableContent = `
+                    <tr><td>Version</td><td>${decodeURIComponent(parts[0])}</td></tr>
+                    <tr><td>Exercice</td><td>${decodeURIComponent(parts[1])}</td></tr>
+                    <tr><td>Code de réussite Moodle</td><td>${decodeURIComponent(parts[2])}</td></tr>
+                    <tr><td>Prénom</td><td>${decodeURIComponent(parts[3])}</td></tr>
+                    <tr><td>Début de l'exercice</td><td>${decodeURIComponent(parts[4])}</td></tr>
+                    <tr><td>Nom</td><td>${decodeURIComponent(parts[5])}</td></tr>
+                    <tr><td>Réussite de l'exercice</td><td>${decodeURIComponent(parts[6])}</td></tr>
+                    <tr><td>Matricule</td><td>${decodeURIComponent(parts[7])}</td></tr>
+                    <tr><td>Questions réussies</td><td>${decodeURIComponent(parts[8])}</td></tr>
+                `;
 
-            document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
+                document.getElementById('info').innerHTML = `<table>${tableContent}</table>`;
+            } catch (error) {
+                console.error("Error decoding URI component:", error);
+                document.getElementById('info').innerHTML = "<p>Error decoding the information. Please check the QR code and try again.</p>";
+            }
         }
     </script>
 </head>
