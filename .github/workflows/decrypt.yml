@@ -2,6 +2,10 @@ name: Decrypt Data
 
 on:
   workflow_dispatch:
+    inputs:
+      encrypted_data:
+        description: 'Encrypted data'
+        required: true
 
 jobs:
   decrypt:
@@ -15,6 +19,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
+
+    - name: Write encrypted data to file
+      run: echo "${{ github.event.inputs.encrypted_data }}" > encrypted_data.txt
 
     - name: Run decryption script
       run: node decrypt.js
