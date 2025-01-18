@@ -1,5 +1,4 @@
 const fs = require('fs');
-const url = require('url');
 
 // Function to decrypt the text
 function decryptText(encryptedText) {
