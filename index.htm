@@ -54,50 +54,69 @@
         }
     </style>
     <script>
-        function decryptString(encryptedText, privateKey) {
-            let decryptedText = '';
-            
-            for (let i = 0; i < encryptedText.length; i++) {
-                let charCode = encryptedText.charCodeAt(i);
-                charCode = (charCode ^ privateKey) % 256; // Simplified RSA decryption
-                decryptedText += String.fromCharCode(charCode);
-            }
-            
-            return decryptedText;
+       function decryptString(encryptedText, privateKey) {
+    let base64DecodedText = base64Decode(encryptedText);
+    let decryptedText = '';
+    
+    for (let i = 0; i < base64DecodedText.length; i++) {
+        let charCode = base64DecodedText.charCodeAt(i);
+        charCode = (charCode ^ privateKey) % 256; // Simplified RSA decryption
+        decryptedText += String.fromCharCode(charCode);
+    }
+    
+    return decryptedText;
+}
+
+function base64Decode(input) {
+    const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let output = '';
+    let charCode = 0;
+    
+    input = input.replace(/=+$/, '');
+    for (let i = 0, j = 0; i < input.length; i++) {
+        charCode = (base64Chars.indexOf(input.charAt(i)) << 2) | (base64Chars.indexOf(input.charAt(i + 1)) >> 4);
+        output += String.fromCharCode(charCode);
+        if ((i + 1) % 2 === 0) {
+            i++;
         }
+    }
+    
+    return output;
+}
 
-        function decodePercentEncodedString(encodedString) {
-            return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
-                return String.fromCharCode(parseInt(p1, 16));
-            });
-        }
+function decodePercentEncodedString(encodedString) {
+    return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode(parseInt(p1, 16));
+    });
+}
 
-        function displayInfo() {
-            try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const encryptedText = urlParams.get('data');
-                const privateKey = 3; // Example private key
+function displayInfo() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const encryptedText = urlParams.get('data');
+        const privateKey = 3; // Example private key
 
-                const decryptedText = decryptString(encryptedText, privateKey);
+        const decryptedText = decryptString(encryptedText, privateKey);
 
-                const parts = decryptedText.split(';');
+        const parts = decryptedText.split(';');
 
-                const decodedParts = parts.map(part => decodePercentEncodedString(part));
+        const decodedParts = parts.map(part => decodePercentEncodedString(part));
 
-                document.getElementById('version').innerText = decodedParts[0];
-                document.getElementById('exercice').innerText = decodedParts[1];
-                document.getElementById('code').innerText = decodedParts[2];
-                document.getElementById('prenom').innerText = decodedParts[3];
-                document.getElementById('debut').innerText = decodedParts[4];
-                document.getElementById('nom').innerText = decodedParts[5];
-                document.getElementById('reussite').innerText = decodedParts[6];
-                document.getElementById('matricule').innerText = decodedParts[7];
-                document.getElementById('questions').innerText = decodedParts[8];
-            } catch (error) {
-                console.error("Error decoding the information:", error);
-                document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.</div>";
-            }
-        }
+        document.getElementById('version').innerText = decodedParts[0];
+        document.getElementById('exercice').innerText = decodedParts[1];
+        document.getElementById('code').innerText = decodedParts[2];
+        document.getElementById('prenom').innerText = decodedParts[3];
+        document.getElementById('debut').innerText = decodedParts[4];
+        document.getElementById('nom').innerText = decodedParts[5];
+        document.getElementById('reussite').innerText = decodedParts[6];
+        document.getElementById('matricule').innerText = decodedParts[7];
+        document.getElementById('questions').innerText = decodedParts[8];
+    } catch (error) {
+        console.error("Error decoding the information:", error);
+        document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
+    }
+}
+
     </script>
 </head>
 <body onload="displayInfo()">
