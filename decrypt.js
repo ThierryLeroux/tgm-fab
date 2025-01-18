@@ -9,8 +9,8 @@ function decryptText(encryptedText) {
     return decryptedText;
 }
 
-// Simulate fetching the encrypted data from the URL
-const encryptedData = 'your-encrypted-data-from-url'; // Replace with actual encrypted data
+// Read the encrypted data from the file
+const encryptedData = fs.readFileSync('encrypted_data.txt', 'utf8');
 
 // Decrypt the data
 const decryptedData = decryptText(encryptedData);
