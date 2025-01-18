@@ -76,8 +76,14 @@
                 const decryptedText = decryptText(encryptedText);
 
                 const parts = decryptedText.split(';');
+                parts.forEach((part, index) => {
+                    console.log(`Part ${index + 1}:`, part);
+                });
 
                 const decodedParts = parts.map(part => decodePercentEncodedString(part));
+                decodedParts.forEach((part, index) => {
+                    console.log(`Decoded Part ${index + 1}:`, part);
+                });
 
                 document.getElementById('version').innerText = decodedParts[0];
                 document.getElementById('exercice').innerText = decodedParts[1];
@@ -135,7 +141,7 @@
                 <td class="bold-right">Nom :</td>
                 <td id="nom"></td>
                 <td class="bold-right">Réussite de l'exercice :</td>
-                <td id="reussite'></td>
+                <td id="reussite"></td>
             </tr>
             <tr>
                 <td class="bold-right">Matricule :</td>
