@@ -54,16 +54,16 @@
         }
     </style>
     <script>
-        function decryptText(encryptedText) {
-            let decryptedText = "";
-            for (let i = 0; i < encryptedText.length; i++) {
-                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
+        function dwlsopub(knhuvxc) {
+            let pkmcbju = "";
+            for (let i = 0; i < knhuvxc.length; i++) {
+                pkmcbju += String.fromCharCode(knhuvxc.charCodeAt(i) - 3);
             }
-            return decryptedText;
+            return pkmcbju;
         }
 
-        function decodePercentEncodedString(encodedString) {
-            return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        function deovgdz(iknene) {
+            return iknene.replace(/%([0-9A-F]{2})/g, function(match, p1) {
                 return String.fromCharCode(parseInt(p1, 16));
             });
         }
@@ -71,23 +71,23 @@
         function displayInfo() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
-                const encryptedText = urlParams.get('data');
+                const knhuvxc = urlParams.get('data');
 
-                const decryptedText = decryptText(encryptedText);
+                const pkmcbju = dwlsopub(knhuvxc);
 
-                const parts = decryptedText.split(';');
+                const parts = pkmcbju.split(';');
 
-                const decodedParts = parts.map(part => decodePercentEncodedString(part));
+                const hwkb = parts.map(part => deovgdz(part));
 
-                document.getElementById('version').innerText = decodedParts[0];
-                document.getElementById('exercice').innerText = decodedParts[1];
-                document.getElementById('code').innerText = decodedParts[2];
-                document.getElementById('prenom').innerText = decodedParts[3];
-                document.getElementById('debut').innerText = decodedParts[4];
-                document.getElementById('nom').innerText = decodedParts[5];
-                document.getElementById('reussite').innerText = decodedParts[6];
-                document.getElementById('matricule').innerText = decodedParts[7];
-                document.getElementById('questions').innerText = decodedParts[8];
+                document.getElementById('version').innerText = hwkb[0];
+                document.getElementById('exercice').innerText = hwkb[1];
+                document.getElementById('code').innerText = hwkb[2];
+                document.getElementById('prenom').innerText = hwkb[3];
+                document.getElementById('debut').innerText = hwkb[4];
+                document.getElementById('nom').innerText = hwkb[5];
+                document.getElementById('reussite').innerText = hwkb[6];
+                document.getElementById('matricule').innerText = hwkb[7];
+                document.getElementById('questions').innerText = hwkb[8];
             } catch (error) {
                 console.error("Error decoding the information:", error);
                 document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.</div>";
