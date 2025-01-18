@@ -77,12 +77,10 @@
 
                 const parts = decryptedText.split(';');
                 parts.forEach((part, index) => {
-                    console.log(`Part ${index + 1}:`, part);
                 });
 
                 const decodedParts = parts.map(part => decodePercentEncodedString(part));
                 decodedParts.forEach((part, index) => {
-                    console.log(`Decoded Part ${index + 1}:`, part);
                 });
 
                 document.getElementById('version').innerText = decodedParts[0];
