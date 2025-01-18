@@ -45,67 +45,40 @@
             text-align: right;
         }
         .bottom-border {
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid black.
         }
         .footer {
             text-align: right;
             font-style: italic;
-            margin-top: 20px;
+            margin-top: 20px.
         }
     </style>
     <script>
-        function decryptText(encryptedText) {
-            let decryptedText = "";
-            for (let i = 0; i < encryptedText.length; i++) {
-                decryptedText += String.fromCharCode(encryptedText.charCodeAt(i) - 3);
-            }
-            return decryptedText;
-        }
-
-        function decodePercentEncodedString(encodedString) {
-            return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
-                return String.fromCharCode(parseInt(p1, 16));
-            });
-        }
-
-        function displayInfo() {
+        async function fetchDecryptedData() {
             try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const encryptedText = urlParams.get('data');
-                console.log("Step 1 - Encrypted Text from QR Code:", encryptedText); // Step 1
+                const response = await fetch('decrypted_data.txt');
+                const decryptedData = await response.text();
+                const parts = decryptedData.split(';');
 
-                const decryptedText = decryptText(encryptedText);
-                console.log("Step 2 - Decrypted Text (still URL encoded):", decryptedText); // Step 2
-
-                const parts = decryptedText.split(';');
-                console.log("Step 3 - URL Encoded Variables:"); // Step 3
-                parts.forEach((part, index) => {
-                    console.log(`Part ${index + 1}:`, part);
-                });
-
-                const decodedParts = parts.map(part => decodePercentEncodedString(part));
-                console.log("Step 4 - Decoded Variables:"); // Step 4
-                decodedParts.forEach((part, index) => {
-                    console.log(`Decoded Part ${index + 1}:`, part);
-                });
-
-                document.getElementById('version').innerText = decodedParts[0];
-                document.getElementById('exercice').innerText = decodedParts[1];
-                document.getElementById('code').innerText = decodedParts[2];
-                document.getElementById('prenom').innerText = decodedParts[3];
-                document.getElementById('debut').innerText = decodedParts[4];
-                document.getElementById('nom').innerText = decodedParts[5];
-                document.getElementById('reussite').innerText = decodedParts[6];
-                document.getElementById('matricule').innerText = decodedParts[7];
-                document.getElementById('questions').innerText = decodedParts[8];
+                document.getElementById('version').innerText = parts[0];
+                document.getElementById('exercice').innerText = parts[1];
+                document.getElementById('code').innerText = parts[2];
+                document.getElementById('prenom').innerText = parts[3];
+                document.getElementById('debut').innerText = parts[4];
+                document.getElementById('nom').innerText = parts[5];
+                document.getElementById('reussite').innerText = parts[6];
+                document.getElementById('matricule').innerText = parts[7];
+                document.getElementById('questions').innerText = parts[8];
             } catch (error) {
-                console.error("Error decoding the information:", error);
-                document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.</div>";
+                console.error("Error fetching the decrypted data:", error);
+                document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error fetching the decrypted data. Please try again later.</div>";
             }
         }
+
+        document.addEventListener('DOMContentLoaded', fetchDecryptedData);
     </script>
 </head>
-<body onload="displayInfo()">
+<body>
     <div class="header">
         <img src="logo-cvm.svg" alt="Logo">
         <div class="right-align">
@@ -145,7 +118,7 @@
                 <td class="bold-right">Nom :</td>
                 <td id="nom"></td>
                 <td class="bold-right">Réussite de l'exercice :</td>
-                <td id="reussite"></td>
+                <td id="reussite'></td>
             </tr>
             <tr>
                 <td class="bold-right">Matricule :</td>
