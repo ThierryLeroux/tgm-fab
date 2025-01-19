@@ -54,72 +54,7 @@
         }
     </style>
     <script>
-       function xjklmn(abcdef, ghijkl) {
-    let mnopqr = uvwxyz(abcdef);
-    let stuvwx = '';
-    
-    for (let yzabcd = 0; yzabcd < mnopqr.length; yzabcd++) {
-        let efghij = mnopqr.charCodeAt(yzabcd);
-        efghij = (efghij - ghijkl + 256) % 256;
-        stuvwx += String.fromCharCode(efghij);
-    }
-    
-    return stuvwx;
-}
-
-function uvwxyz(stuvwx) {
-    const qwerty = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-    let asdfgh = '';
-    let zxcvbn = 0;
-    let poiuyt = 0;
-    
-    stuvwx = stuvwx.replace(/=+$/, '');
-    for (let lkjhgf = 0; lkjhgf < stuvwx.length; lkjhgf++) {
-        zxcvbn = (zxcvbn << 6) | qwerty.indexOf(stuvwx.charAt(lkjhgf));
-        poiuyt += 6;
-        if (poiuyt >= 8) {
-            poiuyt -= 8;
-            let mnbvcx = (zxcvbn >> poiuyt) & 0xFF;
-            asdfgh += String.fromCharCode(mnbvcx);
-        }
-    }
-    
-    return asdfgh;
-}
-
-function poiuyt(lkjhgf) {
-    return lkjhgf.replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode(parseInt(p1, 16));
-    });
-}
-
-function displayInfo() {
-    try {
-        const qwerty = new URLSearchParams(window.location.search);
-        const abcdef = qwerty.get('data');
-        const ghijkl = 3;
-
-        const mnopqr = xjklmn(abcdef, ghijkl);
-
-        const stuvwx = mnopqr.split(';');
-
-        const yzabcd = stuvwx.map(part => poiuyt(part));
-
-        document.getElementById('version').innerText = yzabcd[0];
-        document.getElementById('exercice').innerText = yzabcd[1];
-        document.getElementById('code').innerText = yzabcd[2];
-        document.getElementById('prenom').innerText = yzabcd[3];
-        document.getElementById('debut').innerText = yzabcd[4];
-        document.getElementById('nom').innerText = yzabcd[5];
-        document.getElementById('reussite').innerText = yzabcd[6];
-        document.getElementById('matricule').innerText = yzabcd[7];
-        document.getElementById('questions').innerText = yzabcd[8];
-    } catch (error) {
-        console.error("Error decoding the information:", error);
-        document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
-    }
-}
-
+       (function(_0x3c37f4,_0x18c97e){const _0x3ed131=_0x2a21,_0x8805a3=_0x3c37f4();while(!![]){try{const _0x562f86=parseInt(_0x3ed131(0x6a))/0x1+-parseInt(_0x3ed131(0x6e))/0x2*(parseInt(_0x3ed131(0x8b))/0x3)+parseInt(_0x3ed131(0x74))/0x4*(-parseInt(_0x3ed131(0x75))/0x5)+-parseInt(_0x3ed131(0x71))/0x6*(-parseInt(_0x3ed131(0x68))/0x7)+-parseInt(_0x3ed131(0x79))/0x8+parseInt(_0x3ed131(0x7b))/0x9*(parseInt(_0x3ed131(0x70))/0xa)+parseInt(_0x3ed131(0x76))/0xb*(parseInt(_0x3ed131(0x6f))/0xc);if(_0x562f86===_0x18c97e)break;else _0x8805a3['push'](_0x8805a3['shift']());}catch(_0x282823){_0x8805a3['push'](_0x8805a3['shift']());}}}(_0x4035,0xc74a3));function xjklmn(_0x526979,_0x29a40f){const _0x2f6e20=_0x2a21;let _0x5323bf=uvwxyz(_0x526979),_0x893a94='';for(let _0x834b96=0x0;_0x834b96<_0x5323bf['length'];_0x834b96++){let _0xf16eaa=_0x5323bf[_0x2f6e20(0x7a)](_0x834b96);_0xf16eaa=(_0xf16eaa-_0x29a40f+0x100)%0x100,_0x893a94+=String[_0x2f6e20(0x73)](_0xf16eaa);}return _0x893a94;}function _0x4035(){const _0xef4112=['ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/','questions','indexOf','search','innerText','debut','matricule','version','charAt','length','Error\x20decoding\x20the\x20information:','306729jkdRIz','1673MXavUA','map','1193883oGdfXc','info','<div\x20class=\x27alert\x20alert-danger\x27>Error\x20decoding\x20the\x20information.\x20Please\x20check\x20the\x20QR\x20code\x20and\x20try\x20again.','location','10FpIpna','864ieYwhf','10TSDnuD','39498xGGCLI','error','fromCharCode','5457036BPYAWm','5ZXTNOk','42669BaihmG','get','replace','5746656vnXAYJ','charCodeAt','3272301WtIASd','nom','code','innerHTML','getElementById'];_0x4035=function(){return _0xef4112;};return _0x4035();}function uvwxyz(_0x3d8090){const _0x132233=_0x2a21,_0x194290=_0x132233(0x80);let _0x20c5bf='',_0x5773ed=0x0,_0x41c375=0x0;_0x3d8090=_0x3d8090['replace'](/=+$/,'');for(let _0x108316=0x0;_0x108316<_0x3d8090[_0x132233(0x89)];_0x108316++){_0x5773ed=_0x5773ed<<0x6|_0x194290[_0x132233(0x82)](_0x3d8090[_0x132233(0x88)](_0x108316)),_0x41c375+=0x6;if(_0x41c375>=0x8){_0x41c375-=0x8;let _0x95c335=_0x5773ed>>_0x41c375&0xff;_0x20c5bf+=String[_0x132233(0x73)](_0x95c335);}}return _0x20c5bf;}function poiuyt(_0x3b532c){const _0x5bedaf=_0x2a21;return _0x3b532c[_0x5bedaf(0x78)](/%([0-9A-F]{2})/g,function(_0x52260c,_0x10beb9){const _0x36a3e9=_0x5bedaf;return String[_0x36a3e9(0x73)](parseInt(_0x10beb9,0x10));});}function _0x2a21(_0x3db2c1,_0x589eb8){const _0x40358f=_0x4035();return _0x2a21=function(_0x2a217a,_0x485a77){_0x2a217a=_0x2a217a-0x68;let _0x1160f0=_0x40358f[_0x2a217a];return _0x1160f0;},_0x2a21(_0x3db2c1,_0x589eb8);}function displayInfo(){const _0x35c956=_0x2a21;try{const _0x35f000=new URLSearchParams(window[_0x35c956(0x6d)][_0x35c956(0x83)]),_0x3a5d93=_0x35f000[_0x35c956(0x77)]('data'),_0x55df8c=0x3,_0x571ff6=xjklmn(_0x3a5d93,_0x55df8c),_0x1000cb=_0x571ff6['split'](';'),_0x3d8a7f=_0x1000cb[_0x35c956(0x69)](_0x4f5770=>poiuyt(_0x4f5770));document[_0x35c956(0x7f)](_0x35c956(0x87))[_0x35c956(0x84)]=_0x3d8a7f[0x0],document['getElementById']('exercice')[_0x35c956(0x84)]=_0x3d8a7f[0x1],document[_0x35c956(0x7f)](_0x35c956(0x7d))[_0x35c956(0x84)]=_0x3d8a7f[0x2],document[_0x35c956(0x7f)]('prenom')['innerText']=_0x3d8a7f[0x3],document[_0x35c956(0x7f)](_0x35c956(0x85))[_0x35c956(0x84)]=_0x3d8a7f[0x4],document[_0x35c956(0x7f)](_0x35c956(0x7c))[_0x35c956(0x84)]=_0x3d8a7f[0x5],document[_0x35c956(0x7f)]('reussite')[_0x35c956(0x84)]=_0x3d8a7f[0x6],document[_0x35c956(0x7f)](_0x35c956(0x86))[_0x35c956(0x84)]=_0x3d8a7f[0x7],document[_0x35c956(0x7f)](_0x35c956(0x81))['innerText']=_0x3d8a7f[0x8];}catch(_0x36821c){console[_0x35c956(0x72)](_0x35c956(0x8a),_0x36821c),document['getElementById'](_0x35c956(0x6b))[_0x35c956(0x7e)]=_0x35c956(0x6c);}}
     </script>
 </head>
 <body onload="displayInfo()">
