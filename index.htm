@@ -54,74 +54,7 @@
         }
     </style>
     <script>
-       function dcSt(ecT, pvK) {
-    let bDcT = bDc(ecT);
-    let dcT = '';
-    
-    for (let i = 0; i < bDcT.length; i++) {
-        let chC = bDcT.charCodeAt(i);
-        chC = (chC - pvK + 256) % 256;
-        dcT += String.fromCharCode(chC);
-    }
-    
-    return dcT;
-}
-
-function bDc(input) {
-    const b64C = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-    let output = '';
-    let chC = 0;
-    let buffer = 0;
-    let bits = 0;
-    
-    input = input.replace(/=+$/, '');
-    for (let i = 0; i < input.length; i++) {
-        buffer = (buffer << 6) | b64C.indexOf(input.charAt(i));
-        bits += 6;
-        if (bits >= 8) {
-            bits -= 8;
-            chC = (buffer >> bits) & 0xFF;
-            output += String.fromCharCode(chC);
-        }
-    }
-    
-    return output;
-}
-
-function dPESt(ecSt) {
-    return ecSt.replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode(parseInt(p1, 16));
-    });
-}
-
-function displayInfo() {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const ecT = urlParams.get('data');
-        const pvK = 4;
-
-        const dcT = dcSt(ecT, pvK);
-
-        const parts = dcT.split(';');
-
-        const dcP = parts.map(part => dPESt(part));
-
-        document.getElementById('version').innerText = dcP[0];
-        document.getElementById('exercice').innerText = dcP[1];
-        document.getElementById('code').innerText = dcP[2];
-        document.getElementById('prenom').innerText = dcP[3];
-        document.getElementById('debut').innerText = dcP[4];
-        document.getElementById('nom').innerText = dcP[5];
-        document.getElementById('reussite').innerText = dcP[6];
-        document.getElementById('matricule').innerText = dcP[7];
-        document.getElementById('questions').innerText = dcP[8];
-    } catch (error) {
-        console.error("Error decoding the information:", error);
-        document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
-    }
-}
-
-
+(function(_0x854dcf,_0x470b6f){const _0x39e4d3=_0xef84,_0x505a19=_0x854dcf();while(!![]){try{const _0x5862f1=-parseInt(_0x39e4d3(0x95))/0x1*(parseInt(_0x39e4d3(0x87))/0x2)+-parseInt(_0x39e4d3(0x89))/0x3*(parseInt(_0x39e4d3(0x80))/0x4)+-parseInt(_0x39e4d3(0x81))/0x5+-parseInt(_0x39e4d3(0x86))/0x6+-parseInt(_0x39e4d3(0x82))/0x7*(parseInt(_0x39e4d3(0x84))/0x8)+parseInt(_0x39e4d3(0x91))/0x9*(parseInt(_0x39e4d3(0x88))/0xa)+parseInt(_0x39e4d3(0x92))/0xb*(parseInt(_0x39e4d3(0x7c))/0xc);if(_0x5862f1===_0x470b6f)break;else _0x505a19['push'](_0x505a19['shift']());}catch(_0x36d82f){_0x505a19['push'](_0x505a19['shift']());}}}(_0x5020,0xae7bd));function _0x5020(){const _0x5d724f=['nom','indexOf','debut','charAt','charCodeAt','info','get','search','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/','1260372KJFLMj','error','getElementById','version','28KrEfkr','1250560fTrkof','7JeXkKv','questions','2979784enSFOD','fromCharCode','1773060nIxMbq','4gDpPIs','4700820ThBaaZ','126093dfbiBN','split','replace','innerText','data','exercice','prenom','code','9UfmhhY','209qxJnFf','map','length','269337UJCweS','location','reussite'];_0x5020=function(){return _0x5d724f;};return _0x5020();}function dcSt(_0x41513e,_0x3152d5){const _0x428a25=_0xef84;let _0x195ede=bDc(_0x41513e),_0x3f6e67='';for(let _0x227b6b=0x0;_0x227b6b<_0x195ede['length'];_0x227b6b++){let _0x49171c=_0x195ede[_0x428a25(0x77)](_0x227b6b);_0x49171c=(_0x49171c-_0x3152d5+0x100)%0x100,_0x3f6e67+=String[_0x428a25(0x85)](_0x49171c);}return _0x3f6e67;}function bDc(_0x389781){const _0xa04c97=_0xef84,_0x15d283=_0xa04c97(0x7b);let _0x4fbbe6='',_0x1b4f6a=0x0,_0x5207ff=0x0,_0x45e1f9=0x0;_0x389781=_0x389781[_0xa04c97(0x8b)](/=+$/,'');for(let _0x5cbd92=0x0;_0x5cbd92<_0x389781[_0xa04c97(0x94)];_0x5cbd92++){_0x5207ff=_0x5207ff<<0x6|_0x15d283[_0xa04c97(0x74)](_0x389781[_0xa04c97(0x76)](_0x5cbd92)),_0x45e1f9+=0x6,_0x45e1f9>=0x8&&(_0x45e1f9-=0x8,_0x1b4f6a=_0x5207ff>>_0x45e1f9&0xff,_0x4fbbe6+=String[_0xa04c97(0x85)](_0x1b4f6a));}return _0x4fbbe6;}function dPESt(_0xde45b2){const _0x4a032b=_0xef84;return _0xde45b2[_0x4a032b(0x8b)](/%([0-9A-F]{2})/g,function(_0x1744ba,_0x77b38d){const _0x5ceccd=_0x4a032b;return String[_0x5ceccd(0x85)](parseInt(_0x77b38d,0x10));});}function _0xef84(_0x2ad1c5,_0x5ac090){const _0x50201b=_0x5020();return _0xef84=function(_0xef84f0,_0x116aec){_0xef84f0=_0xef84f0-0x74;let _0x2259ef=_0x50201b[_0xef84f0];return _0x2259ef;},_0xef84(_0x2ad1c5,_0x5ac090);}function displayInfo(){const _0x450b68=_0xef84;try{const _0x182617=new URLSearchParams(window[_0x450b68(0x96)][_0x450b68(0x7a)]),_0xe4138=_0x182617[_0x450b68(0x79)](_0x450b68(0x8d)),_0x4b2439=0x4,_0x56fb57=dcSt(_0xe4138,_0x4b2439),_0x32f840=_0x56fb57[_0x450b68(0x8a)](';'),_0x109665=_0x32f840[_0x450b68(0x93)](_0x58ae6b=>dPESt(_0x58ae6b));document[_0x450b68(0x7e)](_0x450b68(0x7f))[_0x450b68(0x8c)]=_0x109665[0x0],document['getElementById'](_0x450b68(0x8e))['innerText']=_0x109665[0x1],document[_0x450b68(0x7e)](_0x450b68(0x90))['innerText']=_0x109665[0x2],document[_0x450b68(0x7e)](_0x450b68(0x8f))[_0x450b68(0x8c)]=_0x109665[0x3],document[_0x450b68(0x7e)](_0x450b68(0x75))['innerText']=_0x109665[0x4],document[_0x450b68(0x7e)](_0x450b68(0x98))[_0x450b68(0x8c)]=_0x109665[0x5],document[_0x450b68(0x7e)](_0x450b68(0x97))[_0x450b68(0x8c)]=_0x109665[0x6],document[_0x450b68(0x7e)]('matricule')[_0x450b68(0x8c)]=_0x109665[0x7],document[_0x450b68(0x7e)](_0x450b68(0x83))[_0x450b68(0x8c)]=_0x109665[0x8];}catch(_0x36b05d){console[_0x450b68(0x7d)]('Error\x20decoding\x20the\x20information:',_0x36b05d),document[_0x450b68(0x7e)](_0x450b68(0x78))['innerHTML']='<div\x20class=\x27alert\x20alert-danger\x27>Error\x20decoding\x20the\x20information.\x20Please\x20check\x20the\x20QR\x20code\x20and\x20try\x20again.';}}
     </script>
 </head>
 <body onload="displayInfo()">
