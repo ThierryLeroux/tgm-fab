@@ -55,16 +55,12 @@
     </style>
     <script>
        function decryptString(encryptedText, privateKey) {
-    console.log("Encrypted Text: ", encryptedText);
     let base64DecodedText = base64Decode(encryptedText);
-    console.log("Base64 Decoded Text: ", base64DecodedText);
     let decryptedText = '';
     
     for (let i = 0; i < base64DecodedText.length; i++) {
         let charCode = base64DecodedText.charCodeAt(i);
-        console.log("Char Code Before Decryption: ", charCode);
-        charCode = (charCode - privateKey + 256) % 256; // Simplified RSA decryption
-        console.log("Char Code After Decryption: ", charCode);
+        charCode = (charCode - privateKey + 256) % 256;
         decryptedText += String.fromCharCode(charCode);
     }
     
@@ -73,7 +69,6 @@
 }
 
 function base64Decode(input) {
-    console.log("Base64 Input: ", input);
     const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     let output = '';
     let charCode = 0;
@@ -87,17 +82,14 @@ function base64Decode(input) {
         if (bits >= 8) {
             bits -= 8;
             charCode = (buffer >> bits) & 0xFF;
-            console.log("Decoded Char Code: ", charCode);
             output += String.fromCharCode(charCode);
         }
     }
     
-    console.log("Base64 Decoded Output: ", output);
     return output;
 }
 
 function decodePercentEncodedString(encodedString) {
-    console.log("Percent Encoded String: ", encodedString);
     return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
         return String.fromCharCode(parseInt(p1, 16));
     });
@@ -107,16 +99,13 @@ function displayInfo() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const encryptedText = urlParams.get('data');
-        console.log("URL Encrypted Text: ", encryptedText);
         const privateKey = 3; // Example private key
 
         const decryptedText = decryptString(encryptedText, privateKey);
 
         const parts = decryptedText.split(';');
-        console.log("Decrypted Parts: ", parts);
 
         const decodedParts = parts.map(part => decodePercentEncodedString(part));
-        console.log("Decoded Parts: ", decodedParts);
 
         document.getElementById('version').innerText = decodedParts[0];
         document.getElementById('exercice').innerText = decodedParts[1];
