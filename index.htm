@@ -54,42 +54,42 @@
         }
     </style>
     <script>
-       function decryptString(encryptedText, privateKey) {
-    let base64DecodedText = base64Decode(encryptedText);
-    let decryptedText = '';
+       function dcSt(ecT, pvK) {
+    let bDcT = bDc(ecT);
+    let dcT = '';
     
-    for (let i = 0; i < base64DecodedText.length; i++) {
-        let charCode = base64DecodedText.charCodeAt(i);
-        charCode = (charCode - privateKey + 256) % 256;
-        decryptedText += String.fromCharCode(charCode);
+    for (let i = 0; i < bDcT.length; i++) {
+        let chC = bDcT.charCodeAt(i);
+        chC = (chC - pvK + 256) % 256;
+        dcT += String.fromCharCode(chC);
     }
     
-    return decryptedText;
+    return dcT;
 }
 
-function base64Decode(input) {
-    const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+function bDc(input) {
+    const b64C = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     let output = '';
-    let charCode = 0;
+    let chC = 0;
     let buffer = 0;
     let bits = 0;
     
     input = input.replace(/=+$/, '');
     for (let i = 0; i < input.length; i++) {
-        buffer = (buffer << 6) | base64Chars.indexOf(input.charAt(i));
+        buffer = (buffer << 6) | b64C.indexOf(input.charAt(i));
         bits += 6;
         if (bits >= 8) {
             bits -= 8;
-            charCode = (buffer >> bits) & 0xFF;
-            output += String.fromCharCode(charCode);
+            chC = (buffer >> bits) & 0xFF;
+            output += String.fromCharCode(chC);
         }
     }
     
     return output;
 }
 
-function decodePercentEncodedString(encodedString) {
-    return encodedString.replace(/%([0-9A-F]{2})/g, function(match, p1) {
+function dPESt(ecSt) {
+    return ecSt.replace(/%([0-9A-F]{2})/g, function(match, p1) {
         return String.fromCharCode(parseInt(p1, 16));
     });
 }
@@ -97,24 +97,24 @@ function decodePercentEncodedString(encodedString) {
 function displayInfo() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
-        const encryptedText = urlParams.get('data');
-        const privateKey = 4; // Example private key
+        const ecT = urlParams.get('data');
+        const pvK = 4;
 
-        const decryptedText = decryptString(encryptedText, privateKey);
+        const dcT = dcSt(ecT, pvK);
 
-        const parts = decryptedText.split(';');
+        const parts = dcT.split(';');
 
-        const decodedParts = parts.map(part => decodePercentEncodedString(part));
+        const dcP = parts.map(part => dPESt(part));
 
-        document.getElementById('version').innerText = decodedParts[0];
-        document.getElementById('exercice').innerText = decodedParts[1];
-        document.getElementById('code').innerText = decodedParts[2];
-        document.getElementById('prenom').innerText = decodedParts[3];
-        document.getElementById('debut').innerText = decodedParts[4];
-        document.getElementById('nom').innerText = decodedParts[5];
-        document.getElementById('reussite').innerText = decodedParts[6];
-        document.getElementById('matricule').innerText = decodedParts[7];
-        document.getElementById('questions').innerText = decodedParts[8];
+        document.getElementById('version').innerText = dcP[0];
+        document.getElementById('exercice').innerText = dcP[1];
+        document.getElementById('code').innerText = dcP[2];
+        document.getElementById('prenom').innerText = dcP[3];
+        document.getElementById('debut').innerText = dcP[4];
+        document.getElementById('nom').innerText = dcP[5];
+        document.getElementById('reussite').innerText = dcP[6];
+        document.getElementById('matricule').innerText = dcP[7];
+        document.getElementById('questions').innerText = dcP[8];
     } catch (error) {
         console.error("Error decoding the information:", error);
         document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
