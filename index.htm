@@ -98,7 +98,7 @@ function displayInfo() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const encryptedText = urlParams.get('data');
-        const privateKey = 3; // Example private key
+        const privateKey = 4; // Example private key
 
         const decryptedText = decryptString(encryptedText, privateKey);
 
