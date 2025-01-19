@@ -54,72 +54,36 @@
         }
     </style>
     <script>
-       function qWErTY(uIoPAs, dFgHjK) {
-    let lZxCvB = nMqWeR(uIoPAs);
-    let tYuIoP = '';
+       function decryptString(encryptedText, privateKey) {
+    let base64DecodedText = base64Decode(encryptedText);
+    let decryptedText = '';
     
-    for (let aSdFgH = 0; aSdFgH < lZxCvB.length; aSdFgH++) {
-        let jKlZxC = lZxCvB.charCodeAt(aSdFgH);
-        jKlZxC = (jKlZxC - dFgHjK + 256) % 256;
-        tYuIoP += String.fromCharCode(jKlZxC);
+    for (let i = 0; i < base64DecodedText.length; i++) {
+        let charCode = base64DecodedText.charCodeAt(i);
+        charCode = (charCode - privateKey + 256) % 256; // Simplified RSA decryption
+        decryptedText += String.fromCharCode(charCode);
     }
     
-    return tYuIoP;
+    return decryptedText;
 }
 
-function nMqWeR(tYuIoP) {
-    const aSdFgH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-    let jKlZxC = '';
-    let lZxCvB = 0;
-    let dFgHjK = 0;
+function base64Decode(input) {
+    const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let output = '';
+    let charCode = 0;
+    let buffer = 0;
+    let bits = 0;
     
-    tYuIoP = tYuIoP.replace(/=+$/, '');
-    for (let qWErTY = 0; qWErTY < tYuIoP.length; qWErTY++) {
-        lZxCvB = (lZxCvB << 6) | aSdFgH.indexOf(tYuIoP.charAt(qWErTY));
-        dFgHjK += 6;
-        if (dFgHjK >= 8) {
-            dFgHjK -= 8;
-            let uIoPAs = (lZxCvB >> dFgHjK) & 0xFF;
-            jKlZxC += String.fromCharCode(uIoPAs);
+    input = input.replace(/=+$/, '');
+    for (let i = 0; i < input.length; i++) {
+        buffer = (buffer << 6) | base64Chars.indexOf(input.charAt(i));
+        bits += 6;
+        if (bits >= 8) {
+            bits -= 8;
+            charCode = (buffer >> bits) & 0xFF;
+            output += String.fromCharCode(charCode);
         }
     }
-    
-    return jKlZxC;
-}
-
-function vBnMqW(eRtYuI) {
-    return eRtYuI.replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode(parseInt(p1, 16));
-    });
-}
-
-function displayInfo() {
-    try {
-        const qWErTY = new URLSearchParams(window.location.search);
-        const uIoPAs = qWErTY.get('data');
-        const dFgHjK = 3;
-
-        const lZxCvB = qWErTY(uIoPAs, dFgHjK);
-
-        const tYuIoP = lZxCvB.split(';');
-
-        const aSdFgH = tYuIoP.map(part => vBnMqW(part));
-
-        document.getElementById('version').innerText = aSdFgH[0];
-        document.getElementById('exercice').innerText = aSdFgH[1];
-        document.getElementById('code').innerText = aSdFgH[2];
-        document.getElementById('prenom').innerText = aSdFgH[3];
-        document.getElementById('debut').innerText = aSdFgH[4];
-        document.getElementById('nom').innerText = aSdFgH[5];
-        document.getElementById('reussite').innerText = aSdFgH[6];
-        document.getElementById('matricule').innerText = aSdFgH[7];
-        document.getElementById('questions').innerText = aSdFgH[8];
-    } catch (error) {
-        console.error("Error decoding the information:", error);
-        document.getElementById('info').innerHTML = "<div class='alert alert-danger'>Error decoding the information. Please check the QR code and try again.";
-    }
-}
-
 
     </script>
 </head>
